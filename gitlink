@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+
+display_usage() {
+  echo "Usage: $(basename "$0") [commit SHA]"
+  echo ""
+  echo "  Please set ISSUE_PATTERN and ISSUE_URL. For example:"
+  echo ""
+  echo "    REFERENCE_PATTERN=PS-\d\d\d\d"
+  echo "    TARGET_URL=https://proteantecs.atlassian.net/browse"
+  echo ""
+  echo "Bugs and suggestions: <https://github.com/MarounMaroun/git-checkouter/issues>"
+  exit 1
+}
+
+if [[ -z "$REFERENCE_PATTERN" ]] || [[ -z "$TARGET_URL" ]]; then
+  display_usage
+  exit 1
+fi
+
+sha="$1"
+
+command=
+if command -v open > /dev/null; then
+  command=open
+elif command -v xdg-open > /dev/null; then
+  command=xdg-open
+elif command -v gnome-open > /dev/null; then
+  command=gnome-open
+fi
+
+reference_id=$(git show -s --format=%s "$sha" | grep -o --color=never "$REFERENCE_PATTERN")
+if [[ -n "$reference_id" ]]; then
+  echo "$TARGET_URL/$issue_id"
+  "$command" "$TARGET_URL/$reference_id"
+fi
+
