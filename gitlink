@@ -28,9 +28,15 @@ elif command -v gnome-open > /dev/null; then
   command=gnome-open
 fi
 
-reference_id=$(git show -s --format=%s "$sha" | grep -o --color=never "$REFERENCE_PATTERN")
-if [[ -n "$reference_id" ]]; then
-  echo "$TARGET_URL/$issue_id"
-  "$command" "$TARGET_URL/$reference_id"
+reference_ids=($(git show -s --format=%s "$sha" | grep -o --color=never "$REFERENCE_PATTERN"))
+if [[ ${#reference_ids[@]} == 2 ]]; then
+  for reference_id in "${reference_ids[@]}"; do
+    echo "$TARGET_URL/$reference_id"
+  done
+  exit
+fi
+
+if [[ -n "$reference_ids" ]]; then
+  "$command" "$TARGET_URL/$reference_ids"
 fi
 
