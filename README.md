@@ -6,8 +6,10 @@ Auto link to reference external resources based on the reference ID in the commi
 
 You should have two variables set:
 
-* `REFERENCE_PATTERN` - Pattern used in commit message. For example, to link issues like "PS-1425", you should set the variable to `PS-\d\d\d\d`
-* `TARGET_URL` - Link to the external system you want to link to. For example, if you're using Jira, it should be set to "https://proteantecs.atlassian.net/browse"
+* `REFERENCE_PATTERN` - Pattern used in commit message
+* `TARGET_URL` - Link to the external system you want to link to
+
+For example, to link Jira issues having pattern like "PS-1425", you should set `REFERENCE_PATTERN` to `PS-\d\d\d\d`, and the `TARGET_URL` should be set to `https://<organization>.atlassian.net/browse`.
 
 Once set, you simply run:
 
@@ -15,13 +17,13 @@ Once set, you simply run:
 gitlink <SHA>
 ```
 
-which will open the browser with the issue referenced in the commit message.
+If only one issue is referenced in the commit message, it'll be opened in the browser. Otherwise, you'll get a list of links for the issue.
 
 For example, having the following log:
 
 
 ```
-Author: MarounMaroun <****.com>
+Author: MarounMaroun <****  .com>
 Date:   Tue Jun 30 23:16:30 2020 +0300
 
     BD-5562: handle missing user in the user service
