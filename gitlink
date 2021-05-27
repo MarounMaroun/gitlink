@@ -6,9 +6,9 @@ display_usage() {
   echo "  Please set ISSUE_PATTERN and ISSUE_URL. For example:"
   echo ""
   echo "    REFERENCE_PATTERN=PS-\d\d\d\d"
-  echo "    TARGET_URL=https://proteantecs.atlassian.net/browse"
+  echo "    TARGET_URL=https://myorg.atlassian.net/browse"
   echo ""
-  echo "Bugs and suggestions: <https://github.com/MarounMaroun/git-checkouter/issues>"
+  echo "Bugs and suggestions: <https://github.com/MarounMaroun/gitlink/issues>"
   exit 1
 }
 
